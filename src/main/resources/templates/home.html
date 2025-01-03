@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ToDoappホーム画面</title>
+</head>
+<body>
+	<h1>ToDo登録画面</h1>
+	<form th:action="@{/home}" method="post" th:object="${registForm}">
+		<div>
+			<label for="title">タイトル</label><br>
+			<input type="text" th:field="*{title}">	
+		</div>
+		<div>
+			<label for="memo">メモ</label><br>
+			<textarea th:field="*{memo}"></textarea>
+		</div>
+		<!--後でラジオボタンから種類を選べるようにする
+		<div>
+			<label for="">種類</label><br>
+			<input type="checkbox" id="" name="kinds">
+		</div>
+		-->
+		<div>
+			<input type="submit" value="登録">
+		</div>
+	</form>
+	<a th:href="@{/taskList}">タスク一覧</a>
+	
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>タスク一覧	</title>
+<style>
+	table {
+	  border: 2px solid rgb(140 140 140);
+	}
+
+	th,	td {
+	  border: 1px solid rgb(160 160 160);
+	}
+</style>
+</head>
+<body>
+	<h1>タスク一覧</h1>
+	<table>
+		<thead>
+			<tr>
+				<!--<th>ID</th>-->
+				<th>タイトル</th>
+				<th>メモ</th>
+				<th>編集</th>
+				<th>削除</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="task : ${tasks}">
+				<!--TaskEntityと同じ表記にするか@Culumnで設定する-->
+				<!--<td th:text="${task.task_id}">ID</td>-->
+				<td th:text="${task.task_title}">タイトル</td>
+				<td th:text="${task.task_memo}">メモ</td>
+				<td>
+					<form th:action="@{/taskEdit}" method="get">
+						<input type="hidden" name="id" th:value="${task.task_id}"/>
+						<button type="submit">編集</button>
+					</form>
+				</td>
+				<td>
+					<form th:action="@{/taskDelete}" method="post">
+						<input type="hidden" name="id" th:value="${task.task_id}"/>
+						<button type="submit" onclick="return confirm('本当に削除しますか');">削除</button>
+					</form>
+				</td>				
+			</tr>
+		</tbody>
+	</table>
+	<a th:href="@{/home}">登録画面へ</a>
+
+</body>
+</html>
